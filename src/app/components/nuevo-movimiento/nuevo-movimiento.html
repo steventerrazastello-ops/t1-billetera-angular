@@ -1,0 +1,63 @@
+<div class="card border-0 shadow-sm">
+  <div class="card-body p-4">
+    <h2 id="movimiento-titulo" class="h5 mb-3">Nuevo movimiento</h2>
+
+    <form class="row g-3" novalidate (submit)="registrar($event)">
+      <div class="col-md-5">
+        <label for="tipo" class="form-label">Tipo</label>
+        <select
+          id="tipo"
+          name="tipo"
+          class="form-select"
+          [class.is-invalid]="!!mensajeTipo()"
+          [value]="tipo()"
+          (change)="actualizarTipo($event)"
+          (blur)="tipoTocado.set(true)"
+        >
+          <option value="">Seleccione</option>
+          <option value="recarga">Recarga</option>
+          <option value="gasto">Gasto</option>
+        </select>
+        @if (mensajeTipo()) {
+          <div class="invalid-feedback d-block">{{ mensajeTipo() }}</div>
+        }
+      </div>
+
+      <div class="col-md-4">
+        <label for="monto" class="form-label">Monto (S/)</label>
+        <input
+          id="monto"
+          name="monto"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          class="form-control"
+          [class.is-invalid]="!!mensajeMonto()"
+          [value]="montoTexto()"
+          [attr.aria-invalid]="mensajeMonto() ? 'true' : null"
+          aria-describedby="ayuda-monto"
+          placeholder="0.00"
+          (input)="actualizarMonto($event)"
+          (blur)="montoTocado.set(true)"
+        >
+        @if (mensajeMonto()) {
+          <div class="invalid-feedback d-block">{{ mensajeMonto() }}</div>
+        }
+      </div>
+
+      <div class="col-md-3 d-grid align-items-end">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!formularioValido()"
+        >
+          Registrar
+        </button>
+      </div>
+    </form>
+
+    <p id="ayuda-monto" class="form-text mb-0 mt-3">
+      Solo se aceptan montos numéricos mayores que cero.
+    </p>
+  </div>
+</div>

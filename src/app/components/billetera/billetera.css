@@ -1,0 +1,7 @@
+.wallet-header {
+  background: linear-gradient(135deg, #0d6efd, #084298);
+}
+
+.amount {
+  letter-spacing: -0.04em;
+}
